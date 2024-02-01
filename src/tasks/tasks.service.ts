@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import {Task, TaskStatus} from './task.entity';
 import {v4} from 'uuid';
+import { updateTaskDto } from './dto/task.dto';
 
 //Este archivo va a contener todos nuestros metodos que podremos llamar desde cualquier parte de la aplicación
 
@@ -40,7 +41,7 @@ export class TasksService {
   }
 
 
-  updateTask(id: string, updatedFields: any) {
+  updateTask(id: string, updatedFields: updateTaskDto): Task {
     const task = this.getTaskById(id)
     const newTask = Object.assign(task, updatedFields)
     this.tasks = this.tasks.map(task => task.id === id ? newTask : task)
